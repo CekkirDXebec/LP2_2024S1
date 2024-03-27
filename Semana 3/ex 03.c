@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int main() 
-{
+int main() {
     srand(time(NULL)); // inicializa gerador randômico
 
     int dado = 1 + rand() % 100; // sorteia um número de 1 a 100
@@ -12,33 +11,34 @@ int main()
 
     printf("Tente adivinhar o número sorteado (entre 1 e 100):\n");
 
-    do 
+    while (tentativas < 5) 
     {
         printf("Seu palpite: ");
         scanf("%d", &palpite);
-        tentativas++;
 
         if (palpite < 1 || palpite > 100) 
         {
-            printf("Por favor, insira um número entre 1 e 100.\n");
-            continue; 
+            printf("Insira um número entre 1 e 100.\n");
+            continue;
         }
 
         if (palpite == dado) 
         {
-            printf("Parabéns! Você acertou em %d tentativa(s)!\n", tentativas);
-            break; 
-        } 
-        else if (palpite < dado) 
-        {
+            printf("Parabéns! Você acertou!\n");
+            break;
+        } else if (palpite < dado) {
             printf("Você chutou muito baixo!\n");
-        } 
-        else 
-        {
+        } else {
             printf("Você chutou muito alto!\n");
         }
-    } 
-    while (1);
+        
+        tentativas++;
+    }
+
+    if (tentativas == 5) 
+    {
+        printf("Você excedeu o número máximo de tentativas. O número correto era %d.\n", dado);
+    }
 
     return 0;
 }
